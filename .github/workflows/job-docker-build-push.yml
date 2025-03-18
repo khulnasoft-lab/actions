@@ -3,7 +3,7 @@ name: docker-build-push
 on:
   workflow_call:
     secrets:
-      TOKEN_DOCKERHUB:
+      DOCKER_TOKEN:
         description: docker hub token
         required: false
 
@@ -63,8 +63,8 @@ jobs:
         if: ${{ contains(fromJSON(inputs.registries), 'docker.io') }}
         with:
           registry: docker.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.TOKEN_DOCKERHUB }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       # extract metadata and prepare tags
       - uses: docker/metadata-action@v5.6.1
